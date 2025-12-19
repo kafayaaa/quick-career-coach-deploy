@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Request, Response } from "express";
 import * as pdfjsLib from "pdfjs-dist/legacy/build/pdf.js";
+import { PDFParse } from "pdf-parse";
 import mammoth from "mammoth";
 import { aiExtractCV } from "../utils/aiExtractor.js";
 import { sanitizeText } from "../utils/sanitizeText.js";
@@ -14,24 +16,34 @@ export const parseCV = async (req: Request, res: Response) => {
     const buffer = req.file.buffer;
     let extractedText = "";
 
+    // if (mimetype === "application/pdf") {
+    //   const pdfData = new Uint8Array(buffer);
+    //   const loadingTask = pdfjsLib.getDocument({
+    //     data: pdfData,
+    //     useSystemFonts: true,
+    //     disableFontFace: true, // Menambah stabilitas di serverless
+    //   });
+    //   const pdf = await loadingTask.promise;
+
+    //   for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+    //     const page = await pdf.getPage(pageNum);
+    //     const textContent = await page.getTextContent();
+
+    //     const pageText = textContent.items
+    //       .map((item: any) => ("str" in item ? item.str : ""))
+    //       .join(" ");
+
+    //     extractedText += pageText + "\n";
+    //   }
     if (mimetype === "application/pdf") {
-      const pdfData = new Uint8Array(buffer);
-      const loadingTask = pdfjsLib.getDocument({
-        data: pdfData,
-        useSystemFonts: true,
-        disableFontFace: true, // Menambah stabilitas di serverless
-      });
-      const pdf = await loadingTask.promise;
-
-      for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
-        const page = await pdf.getPage(pageNum);
-        const textContent = await page.getTextContent();
-
-        const pageText = textContent.items
-          .map((item: any) => ("str" in item ? item.str : ""))
-          .join(" ");
-
-        extractedText += pageText + "\n";
+      try {
+        // Kita paksa sebagai 'any' untuk menghindari error "not callable"
+        // saat kompilasi, karena pada runtime JavaScript-nya memang sebuah fungsi.
+        const data = await (PDFParse as any)(buffer);
+        extractedText = data.text || "";
+      } catch (err) {
+        console.error("PDF Parsing failed:", err);
+        return res.status(500).json({ error: "Failed to parse PDF content" });
       }
     } else if (
       mimetype ===
