@@ -8,9 +8,9 @@ import express, {
   ErrorRequestHandler,
 } from "express";
 import cors from "cors";
-import cvRouter from "../backend_core/routes/cv.route";
-import interviewRouter from "../backend_core/routes/interview.route";
-import skillRouter from "../backend_core/routes/skill.route";
+import cvRouter from "../backend_core/routes/cv.route.js";
+import interviewRouter from "../backend_core/routes/interview.route.js";
+import skillRouter from "../backend_core/routes/skill.route.js";
 
 const app = express();
 
