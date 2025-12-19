@@ -1,4 +1,5 @@
 "use client";
+export const dynamic = "force-static";
 
 import { useCV } from "@/context/CVContext";
 import Slugify from "@/utils/slugify";

@@ -1,4 +1,5 @@
 "use client";
+export const dynamic = "force-static";
 
 import { useCV } from "@/context/CVContext";
 import { useRouter } from "next/navigation";
@@ -41,7 +42,7 @@ export default function CVUploadParser() {
       const form = new FormData();
       form.append("cv", file);
 
-      const res = await fetch("http://localhost:5000/api/cv/upload", {
+      const res = await fetch("/api/cv/upload", {
         method: "POST",
         body: form,
       });

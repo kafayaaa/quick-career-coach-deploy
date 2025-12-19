@@ -1,4 +1,5 @@
 "use client";
+export const dynamic = "force-static";
 
 import { LoadingScreen } from "@/components/LoadingScreen";
 import { useCV } from "@/context/CVContext";
@@ -31,14 +32,11 @@ export default function Interview() {
       const stored = localStorage.getItem("newCV");
       const parsedCV = stored ? JSON.parse(stored) : null;
 
-      const response = await fetch(
-        "http://localhost:5000/api/interview/questions",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ newCV: parsedCV, level }),
-        }
-      );
+      const response = await fetch("/api/interview/questions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ newCV: parsedCV, level }),
+      });
 
       const questionsAI = await response.json();
       console.log("Interview Questions:", questionsAI);

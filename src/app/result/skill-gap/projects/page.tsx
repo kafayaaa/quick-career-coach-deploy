@@ -1,4 +1,5 @@
 "use client";
+export const dynamic = "force-static";
 
 import { LoadingScreen } from "@/components/LoadingScreen";
 import { useCV } from "@/context/CVContext";

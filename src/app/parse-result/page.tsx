@@ -1,4 +1,5 @@
 "use client";
+export const dynamic = "force-static";
 
 import ActionButton from "@/components/ActionButton";
 import CVParseSection from "@/components/CVParseSection";
@@ -127,7 +128,7 @@ export default function ParseResult() {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/cv/analyze", {
+      const response = await fetch("/api/cv/analyze", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

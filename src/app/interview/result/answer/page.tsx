@@ -1,4 +1,5 @@
 "use client";
+export const dynamic = "force-static";
 
 import { useInterview } from "@/context/InterviewContext";
 import Slugify from "@/utils/slugify";

@@ -1,4 +1,5 @@
 "use client";
+export const dynamic = "force-static";
 
 import { LoadingScreen } from "@/components/LoadingScreen";
 import { useInterview } from "@/context/InterviewContext";
@@ -110,7 +111,7 @@ export default function Question() {
 
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:5000/api/interview/evaluate", {
+      const res = await fetch("/api/interview/evaluate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ submissions: payload }),

@@ -1,4 +1,5 @@
 "use client";
+export const dynamic = "force-static";
 
 import CircularWithValueLabel from "@/components/CircularBar";
 import Notif from "@/components/Notif";
@@ -69,7 +70,7 @@ export default function SkillGapLayout({
   const handleDownload = async () => {
     if (!analyzeResult) return alert("No analysis result");
 
-    const response = await fetch("http://localhost:5000/api/cv/download-pdf", {
+    const response = await fetch("/api/cv/download-pdf", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

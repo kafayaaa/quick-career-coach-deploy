@@ -1,4 +1,5 @@
 "use client";
+export const dynamic = "force-static";
 
 import CVUploadParser from "@/components/CVUploadParser";
 import WhyGrid from "@/components/WhyGrid";
