@@ -2,6 +2,7 @@
 import { Request, Response } from "express";
 import * as pdfjsLib from "pdfjs-dist/legacy/build/pdf.js";
 import { PDFParse } from "pdf-parse";
+import PDFParser from "pdf2json";
 import mammoth from "mammoth";
 import { aiExtractCV } from "../utils/aiExtractor.js";
 import { sanitizeText } from "../utils/sanitizeText.js";
@@ -35,16 +36,28 @@ export const parseCV = async (req: Request, res: Response) => {
 
     //     extractedText += pageText + "\n";
     //   }
+
+    // if (mimetype === "application/pdf") {
+    //   try {
+    //     const data = await (PDFParse as any)(buffer);
+    //     extractedText = data.text || "";
+    //   } catch (err) {
+    //     console.error("PDF Parsing failed:", err);
+    //     return res.status(500).json({ error: "Failed to parse PDF content" });
+    //   }
+
     if (mimetype === "application/pdf") {
-      try {
-        // Kita paksa sebagai 'any' untuk menghindari error "not callable"
-        // saat kompilasi, karena pada runtime JavaScript-nya memang sebuah fungsi.
-        const data = await (PDFParse as any)(buffer);
-        extractedText = data.text || "";
-      } catch (err) {
-        console.error("PDF Parsing failed:", err);
-        return res.status(500).json({ error: "Failed to parse PDF content" });
-      }
+      const pdfParser = new (PDFParser as any)(null, 1);
+
+      extractedText = await new Promise((resolve, reject) => {
+        pdfParser.on("pdfParser_dataError", (errData: any) =>
+          reject(errData.parserError)
+        );
+        pdfParser.on("pdfParser_dataReady", () => {
+          resolve(pdfParser.getRawTextContent());
+        });
+        pdfParser.parseBuffer(buffer);
+      });
     } else if (
       mimetype ===
         "application/vnd.openxmlformats-officedocument.wordprocessingml.document" ||
