@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { evaluate, questions } from "../controllers/int-ques.controller";
+import { evaluate, questions } from "../controllers/int-ques.controller.js";
 
 const router = Router();
 

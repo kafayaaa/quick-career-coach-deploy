@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import { aiParseSkill } from "../utils/aiParseSkill";
+import { aiParseSkill } from "../utils/aiParseSkill.js";
 import * as pdfjsLib from "pdfjs-dist/legacy/build/pdf.js";
 import mammoth from "mammoth";
-import { sanitizeText } from "../utils/sanitizeText";
-import { aiAnalyzeGap } from "../utils/aiAnalyzeGap";
+import { sanitizeText } from "../utils/sanitizeText.js";
+import { aiAnalyzeGap } from "../utils/aiAnalyzeGap.js";
 
 export const parseSkillCV = async (req: Request, res: Response) => {
   try {

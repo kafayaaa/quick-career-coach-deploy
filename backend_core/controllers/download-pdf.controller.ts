@@ -1,6 +1,6 @@
 import PDFDocument from "pdfkit";
 import { Request, Response } from "express";
-import { AnalyzeResult } from "../types/analysisResult";
+import { AnalyzeResult } from "../types/analysisResult.js";
 
 export const downloadPDF = async (req: Request, res: Response) => {
   try {

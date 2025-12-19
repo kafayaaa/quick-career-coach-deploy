@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { aiAnalyzeCV } from "../utils/aiAnalyze";
-import { aiAnalyzeCVNew } from "../utils/aiAnalyzeNew";
+import { aiAnalyzeCV } from "../utils/aiAnalyze.js";
+import { aiAnalyzeCVNew } from "../utils/aiAnalyzeNew.js";
 
 export const analyzeCV = async (req: Request, res: Response) => {
   try {

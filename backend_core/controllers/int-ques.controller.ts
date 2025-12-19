@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { aiQuestion } from "../utils/aiQuestion";
-import { aiEvaluate } from "../utils/aiEvaluate";
+import { aiQuestion } from "../utils/aiQuestion.js";
+import { aiEvaluate } from "../utils/aiEvaluate.js";
 
 export const questions = async (req: Request, res: Response) => {
   try {

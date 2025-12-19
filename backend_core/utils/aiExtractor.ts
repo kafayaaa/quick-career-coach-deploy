@@ -1,6 +1,6 @@
-import { model } from "../services/gemini";
-import { AICVData, AICVDataSchema } from "../types/ai-cv";
-import { extractJSON } from "./extractJson";
+import { model } from "../services/gemini.js";
+import { AICVData, AICVDataSchema } from "../types/ai-cv.js";
+import { extractJSON } from "./extractJson.js";
 
 export async function aiExtractCV(rawText: string): Promise<AICVData> {
   try {

@@ -1,4 +1,4 @@
-import { model } from "../services/gemini";
+import { model } from "../services/gemini.js";
 
 export async function aiParseSkill(rawText: string) {
   try {

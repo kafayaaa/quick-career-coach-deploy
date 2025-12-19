@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import * as pdfjsLib from "pdfjs-dist/legacy/build/pdf.js";
 import mammoth from "mammoth";
-import { aiExtractCV } from "../utils/aiExtractor";
-import { sanitizeText } from "../utils/sanitizeText";
+import { aiExtractCV } from "../utils/aiExtractor.js";
+import { sanitizeText } from "../utils/sanitizeText.js";
 
 export const parseCV = async (req: Request, res: Response) => {
   try {

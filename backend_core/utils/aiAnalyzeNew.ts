@@ -1,5 +1,5 @@
-import { model } from "../services/gemini";
-import { extractJSON } from "./extractJson";
+import { model } from "../services/gemini.js";
+import { extractJSON } from "./extractJson.js";
 
 export async function aiAnalyzeCVNew(cvData: string, targetRole: string) {
   try {
