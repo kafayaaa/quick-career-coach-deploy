@@ -16,7 +16,11 @@ export const parseCV = async (req: Request, res: Response) => {
 
     if (mimetype === "application/pdf") {
       const pdfData = new Uint8Array(buffer);
-      const loadingTask = pdfjsLib.getDocument({ data: pdfData });
+      const loadingTask = pdfjsLib.getDocument({
+        data: pdfData,
+        useSystemFonts: true,
+        disableFontFace: true, // Menambah stabilitas di serverless
+      });
       const pdf = await loadingTask.promise;
 
       for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
